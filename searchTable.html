@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> Search table with JS </title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+ 
+#myInput {
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+ 
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+ 
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+}
+ 
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+ 
+#myTable tr.header, #myTable tr:hover {
+  background-color: #ffebe0;
+}
+</style>
+</head>
+<body>
+ 
+<h2>Outomation Search Table with Vanila JavaScript</h2>
+ 
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+ 
+<table id="myTable">
+  <tr class="header">
+    <th style="width:60%;">Student Names</th>
+    <th style="width:40%;">Majors</th>
+  </tr>
+  <tr>
+    <td>Dwi Puspita</td>
+    <td>Ilmu Komunikasi</td>
+  </tr>
+  <tr>
+    <td>Anita Kurnia</td>
+    <td>Pendidikan Dokter</td>
+  </tr>
+  <tr>
+    <td>Muhammad Zulfin</td>
+    <td>Sastra Indonesia</td>
+  </tr>
+  <tr>
+    <td>Benny Kurnia</td>
+    <td>Matematika</td>
+  </tr>
+  <tr>
+    <td>Olivia</td>
+    <td>Ilmu Komunikasi</td>
+  </tr>
+  <tr>
+    <td>Ayundri Sartika</td>
+    <td>Akuntansi</td>
+  </tr>
+  <tr>
+    <td>Ceri Hardayati</td>
+    <td>Tata Busana</td>
+  </tr>
+  <tr>
+    <td>Sari Titania</td>
+    <td>Sistem Informasi</td>
+  </tr>
+</table>
+ 
+<!--Kode Script untuk Pencarian Data Otomatis dengan JavaScript-->
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+
+  // Mentarget input tag menggunakan ID myInput  
+  input = document.getElementById("myInput");
+  // Mengambil value input (apapun yg diketikkan user ke dalam input tag), dan menjadikannya huruf besar
+  filter = input.value.toUpperCase();
+
+  // Mentarget tabel tag menggunakan ID myTable
+  table = document.getElementById("myTable");
+  // mencari tag tr di dalam tabel
+  tr = table.getElementsByTagName("tr");
+
+  // tr.length mencari tau berapa banyak jumlah tr di dalam tabel
+  for (i = 0; i < tr.length; i++) {
+    // ada dua td di dalam tr (nama siswa == 0, jurusan == 1)
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      // Masukkan td[0] (nama siswanya aja) ke dalam txtValue
+      txtValue = td.textContent || td.innerText;
+      
+      // cek apakah nama siswa dengan index ke-"filter" LEBIH BESAR DARI -1 (ingat index selalu dr 0, jd kita butuh index ke-0 jika yg dicari tr ke-1)
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        // tampilkan setiap tr yg ada tanpa style display
+        tr[i].style.display = "";
+      } else {
+        // hilangkan setiap tr yg ada dengan display = none
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+ 
+</body>
+</html>
